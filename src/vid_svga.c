@@ -1588,4 +1588,15 @@ void svga_add_status_info(char *s, int max_len, void *p)
         sprintf(temps, "SVGA refresh rate : %i Hz\n\n", svga->frames);
         svga->frames = 0;
         strncat(s, temps, max_len);
+
+        //strncat(s, "CRTC register values\n", max_len);
+        //int i;
+        //for(i=0;i<64;i++)
+        //{
+        //        sprintf(temps, "%02X ", svga->crtc[i]);
+        //        strncat(s, temps, max_len);
+        //        if((i & 15) == 15)
+        //                strncat(s, "\n", max_len);
+        //}
+        //strncat(s, "\n", max_len);
 }

@@ -191,6 +191,20 @@ static void ega_wonder_800_recalctimings(svga_t *svga)
                 case 5: svga->clock = (cpuclock * (double)(1ull << 32)) / 16257000.0; break;
                 case 7: default: svga->clock = (cpuclock * (double)(1ull << 32)) / 36000000.0; break;
         }
+
+        if (!(svga->gdcreg[6] & 1) && !(svga->attrregs[0x10] & 1)) /*Text mode*/
+        {
+                if ((svga->seqregs[1] & 8)) /*40 column*/
+                {
+                        svga->ma_latch -= 3;
+                        svga->hdisp += (svga->seqregs[1] & 1) ? 48 : 54;
+                }
+                else
+                {
+                        svga->ma_latch -= 2;
+                        svga->hdisp += (svga->seqregs[1] & 1) ? 16 : 18;
+                }
+        }
 }
 
 void *ati18800_init()

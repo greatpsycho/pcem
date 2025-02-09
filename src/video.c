@@ -377,6 +377,8 @@ int video_is_mda()
                 case ROM_PC3086:
                 case ROM_MEGAPC:
                 case ROM_ACER386:
+                case ROM_SPC4620P:
+                case ROM_SPC6033P:
                 if (gfxcard != GFX_BUILTIN)
                         break;
                 case ROM_IBMPCJR:
@@ -396,6 +398,7 @@ int video_is_mda()
                 case ROM_IBMPS1_2133_451:
                 case ROM_T3100E:
         	case ROM_T1000:
+                case ROM_AMA932J:
                 case ROM_ELX_PC425X:
                 case ROM_PB410A:
                 case ROM_PB570:
@@ -433,6 +436,8 @@ int video_is_cga()
                 case ROM_PC3086:
                 case ROM_MEGAPC:
                 case ROM_ACER386:
+                case ROM_SPC4620P:
+                case ROM_SPC6033P:
                 if (gfxcard != GFX_BUILTIN)
                         break;
                 case ROM_IBMPS1_2011:
@@ -444,6 +449,7 @@ int video_is_cga()
                 case ROM_IBMPS2_M80:
                 case ROM_IBMPS1_2121:
                 case ROM_IBMPS1_2133_451:
+                case ROM_AMA932J:
                 case ROM_ELX_PC425X:
                 case ROM_PB410A:
                 case ROM_PB570:

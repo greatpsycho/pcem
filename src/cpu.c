@@ -13,6 +13,8 @@ uint32_t cpu_features;
 
 static int cpu_turbo_speed, cpu_nonturbo_speed;
 static int cpu_turbo = 1;
+static int cpu_rom_read_cycles = 4;
+static uint64_t rom_read_timing_ns = 150;
 
 int isa_cycles;
 int has_vlb;
@@ -218,10 +220,7 @@ void cpu_set()
   
         isa_cycles = cpu_s->atclk_div;      
         
-        if (cpu_s->rspeed <= 8000000)
-                cpu_rom_prefetch_cycles = cpu_mem_prefetch_cycles;
-        else
-                cpu_rom_prefetch_cycles = cpu_s->rspeed / 1000000;
+        cpu_rom_prefetch_cycles = (cpu_rom_read_cycles * cpu_s->rspeed * rom_read_timing_ns + 999999999ULL) / 1000000000ULL;
 
         if (cpu_s->pci_speed)
         {
@@ -2159,8 +2158,7 @@ void cpu_update_waitstates()
         if (is486)
                 cpu_prefetch_cycles = (cpu_prefetch_cycles * 11) / 16;
         cpu_mem_prefetch_cycles = cpu_prefetch_cycles;
-        if (cpu_s->rspeed <= 8000000)
-                cpu_rom_prefetch_cycles = cpu_mem_prefetch_cycles;
+        cpu_rom_prefetch_cycles = (cpu_rom_read_cycles * cpu_s->rspeed * rom_read_timing_ns + 999999999ULL) / 1000000000ULL;
 }
 
 void cpu_set_turbo(int turbo)

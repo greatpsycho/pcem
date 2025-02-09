@@ -304,7 +304,7 @@ static inline void exec_interpreter(void)
         cpu_end_block_after_ins = 0;
 }
 
-static inline void exec_recompiler(void)
+static void __attribute__((noinline)) exec_recompiler(void)
 {
         uint32_t phys_addr = get_phys(cs+cpu_state.pc);
         int hash = HASH(phys_addr);
